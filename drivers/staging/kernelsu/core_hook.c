@@ -605,21 +605,11 @@ LSM_HANDLER_TYPE ksu_handle_setuid(struct cred *new, const struct cred *old)
 	// umount the target mnt
 	pr_info("handle umount for uid: %d, pid: %d\n", new_uid.val,
 		current->pid);
-#endif
 
-	// fixme: use `collect_mounts` and `iterate_mount` to iterate all mountpoint and
-	// filter the mountpoint whose target is `/data/adb`
-	try_umount("/system", true, 0);
-	try_umount("/vendor", true, 0);
-	try_umount("/product", true, 0);
-	try_umount("/system_ext", true, 0);
-
-	// try umount modules path
-	try_umount("/data/adb/modules", false, MNT_DETACH);
-
-	// try umount ksu temp path
-	try_umount("/debug_ramdisk", false, MNT_DETACH);
-	try_umount("/sbin", false, MNT_DETACH);
+	// don't free! keep on heap! this is used on subsequent setuid calls
+	// if this is freed, we dont have anything to umount next
+	list_for_each_entry(entry, &mount_list, list)
+		try_umount(entry->umountable, MNT_DETACH);
 
 	return 0;
 }
