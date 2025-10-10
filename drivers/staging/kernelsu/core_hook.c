@@ -605,11 +605,14 @@ LSM_HANDLER_TYPE ksu_handle_setuid(struct cred *new, const struct cred *old)
 	// umount the target mnt
 	pr_info("handle umount for uid: %d, pid: %d\n", new_uid.val,
 		current->pid);
+#endif
 
-	// don't free! keep on heap! this is used on subsequent setuid calls
-	// if this is freed, we dont have anything to umount next
-	list_for_each_entry(entry, &mount_list, list)
+	list_for_each_entry_safe(entry, tmp, &mount_list, list) {
 		try_umount(entry->umountable, MNT_DETACH);
+		// don't free! keep on heap! this is used on subsequent setuid calls
+		// if this is freed, we dont have anything to umount next
+		// FIXME: might leak, refresh the list?
+	}
 
 	return 0;
 }
