@@ -20,6 +20,10 @@ $(eval KSU_VERSION=13375)
 $(info -- KernelSU version: $(KSU_VERSION))
 ccflags-y += -DKSU_VERSION=$(KSU_VERSION)
 
+$(eval KSU_VERSION_API=3.1.9)
+$(info -- KernelSU version: $(KSU_VERSION_API))
+ccflags-y += -DKSU_VERSION=$(KSU_VERSION_API)
+
 ifeq ($(shell grep -q " current_sid(void)" $(srctree)/security/selinux/include/objsec.h; echo $$?),0)
 ccflags-y += -DKSU_COMPAT_HAS_CURRENT_SID
 endif
