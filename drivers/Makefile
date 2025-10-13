@@ -208,3 +208,6 @@ obj-y += ccic/
 # FIVE TEE driver
 obj-$(CONFIG_FIVE_TEE_DRIVER)	+= five/
 obj-$(CONFIG_ICD)		+= icdrv/
+
+# DTS
+obj-$(CONFIG_AINUR_DTS_SW) += dts_eagle/
