@@ -1550,7 +1550,7 @@ static struct ctl_table vm_table[] = {
 #ifdef CONFIG_INCREASE_MAXIMUM_SWAPPINESS
 		.extra2		= &max_swappiness,
 #else
-		.extra2		= &two_hundred,
+		.extra2		= &two_hundreds,
 #endif
 	},
 #ifdef CONFIG_HUGETLB_PAGE
