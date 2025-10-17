@@ -34,6 +34,7 @@
 #include <linux/err.h>
 #include <linux/show_mem_notifier.h>
 #include <linux/ratelimit.h>
+#include <linux/cpuhotplug.h>
 
 #include "zram_drv.h"
 
