@@ -29,13 +29,4 @@ config KSU_LSM_SECURITY_HOOKS
 	  Disabling this is mostly only useful for kernel 4.1 and older.
 	  Make sure to implement manual hooks on security/security.c.
 
-config KSU_MANUAL_HOOK
-	bool "Manual hooking GKI kernels without kprobes"
-	depends on KSU && KSU != m
-	default y if !KPROBES
-	default n
-	help
-	  If enabled, Hook required KernelSU syscalls with manually-patched function.
-	  If disabled, Hook required KernelSU syscalls with Kernel-probe.
-
 endmenu
