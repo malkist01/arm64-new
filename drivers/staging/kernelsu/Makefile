@@ -33,7 +33,7 @@ obj-$(CONFIG_KSU) += kernelsu.o
 obj-$(CONFIG_KSU_TRACEPOINT_HOOK) += ksu_trace_export.o 
 
 $(eval KSU_VERSION=v3.2.0-8943bab8@nongki)
-$(info -- KernelSU version: $(KSU_VERSION))
+$(info -- SukiSU-Ultra version: $(KSU_VERSION))
 ccflags-y += -DKSU_VERSION=$(KSU_VERSION)
 
 ifeq ($(shell grep -q " current_sid(void)" $(srctree)/security/selinux/include/objsec.h; echo $$?),0)
@@ -57,8 +57,8 @@ ccflags-y += -DKSU_MANAGER_PACKAGE=\"$(KSU_MANAGER_PACKAGE)\"
 $(info -- KernelSU Manager package name: $(KSU_MANAGER_PACKAGE))
 endif
 
-$(info -- KernelSU Manager signature size: $(EXPECTED_SIZE_SHIRKNEKO))
-$(info -- KernelSU Manager signature hash: $(EXPECTED_HASH_SHIRKNEKO))
+$(info -- SukiSU-Ultra signature size: $(EXPECTED_SIZE_SHIRKNEKO))
+$(info -- SukiSU-Ultra signature hash: $(EXPECTED_HASH_SHIRKNEKO))
 
 ccflags-y += -EXPECTED_SIZE_SHIRKNEKO=$(EXPECTED_SIZE_SHIRKNEKO)
 ccflags-y += -EXPECTED_HASH_SHIRKNEKO=\"$(EXPECTED_HASH_SHIRKNEKO)\"
