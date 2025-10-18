@@ -32,7 +32,7 @@ ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-
 obj-$(CONFIG_KSU) += kernelsu.o
 obj-$(CONFIG_KSU_TRACEPOINT_HOOK) += ksu_trace_export.o 
 
-$(eval KSU_VERSION=3.2.0)
+$(eval KSU_VERSION=v3.2.0-8943bab8@nongki)
 $(info -- KernelSU version: $(KSU_VERSION))
 ccflags-y += -DKSU_VERSION=$(KSU_VERSION)
 
