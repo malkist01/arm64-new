@@ -11,16 +11,13 @@ kernelsu-objs += kernel_compat.o
 kernelsu-objs += selinux/selinux.o
 kernelsu-objs += selinux/sepolicy.o
 kernelsu-objs += selinux/rules.o
-kernelsu-objs += throne_tracker_legacy.o
-
 ccflags-y += -I$(srctree)/security/selinux -I$(srctree)/security/selinux/include
 ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-generic/errno.h
 
 obj-$(CONFIG_KSU) += kernelsu.o
-obj-$(CONFIG_KSU_TRACEPOINT_HOOK) += ksu_trace_export.o 
 
-$(eval KSU_VERSION=v3.2.0-8943bab8@nongki)
-$(info -- SukiSU-Ultra version: $(KSU_VERSION))
+$(eval KSU_VERSION=12069)
+$(info -- KernelSU version: $(KSU_VERSION))
 ccflags-y += -DKSU_VERSION=$(KSU_VERSION)
 
 ifeq ($(shell grep -q " current_sid(void)" $(srctree)/security/selinux/include/objsec.h; echo $$?),0)
@@ -31,12 +28,12 @@ ifeq ($(shell grep -q "struct selinux_state " $(srctree)/security/selinux/includ
 ccflags-y += -DKSU_COMPAT_HAS_SELINUX_STATE
 endif
 
-ifndef EXPECTED_SIZE_SHIRKNEKO
-EXPECTED_SIZE_SHIRKNEKO := 0x35c
+ifndef KSU_EXPECTED_SIZE
+KSU_EXPECTED_SIZE := 0x033b
 endif
 
-ifndef EXPECTED_SIZE_SHIRKNEKO
-EXPECTED_HASH_SHIRKNEKO := 947ae944f3de4ed4c21a7e4f7953ecf351bfa2b36239da37a34111ad29993eef
+ifndef KSU_EXPECTED_HASH
+KSU_EXPECTED_HASH := c371061b19d8c7d7d6133c6a9bafe198fa944e50c1b31c9d8daa8d7f1fc2d2d6
 endif
 
 ifdef KSU_MANAGER_PACKAGE
@@ -44,11 +41,11 @@ ccflags-y += -DKSU_MANAGER_PACKAGE=\"$(KSU_MANAGER_PACKAGE)\"
 $(info -- KernelSU Manager package name: $(KSU_MANAGER_PACKAGE))
 endif
 
-$(info -- SukiSU-Ultra signature size: $(EXPECTED_SIZE_SHIRKNEKO))
-$(info -- SukiSU-Ultra signature hash: $(EXPECTED_HASH_SHIRKNEKO))
+$(info -- KernelSU Manager signature size: $(KSU_EXPECTED_SIZE))
+$(info -- KernelSU Manager signature hash: $(KSU_EXPECTED_HASH))
 
-ccflags-y += -EXPECTED_SIZE_SHIRKNEKO=$(EXPECTED_SIZE_SHIRKNEKO)
-ccflags-y += -EXPECTED_HASH_SHIRKNEKO=\"$(EXPECTED_HASH_SHIRKNEKO)\"
+ccflags-y += -DEXPECTED_SIZE=$(KSU_EXPECTED_SIZE)
+ccflags-y += -DEXPECTED_HASH=\"$(KSU_EXPECTED_HASH)\"
 
 # UL, look for "ext4_unregister_sysfs" on fs/ext4
 ifeq ($(shell grep -q "^extern void ext4_unregister_sysfs" $(srctree)/fs/ext4/ext4.h 2>/dev/null; echo $$?),0)
