@@ -13,12 +13,7 @@ kernelsu-objs += selinux/sepolicy.o
 kernelsu-objs += selinux/rules.o
 ccflags-y += -I$(srctree)/security/selinux -I$(srctree)/security/selinux/include
 ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-generic/errno.h
-
-ifeq ($(CONFIG_KSU_TRACEPOINT_HOOK), y)
 kernelsu-objs += ksu_trace.o
-endif
-
-ifeq ($(CONFIG_KSU_THRONE_TRACKER_LEGACY),y)
 $(info -- KernelSU/compat: using legacy throne tracker)
 kernelsu-objs += throne_tracker_legacy.o
 else
