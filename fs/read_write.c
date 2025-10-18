@@ -18,6 +18,7 @@
 #include <linux/splice.h>
 #include <linux/compat.h>
 #include "internal.h"
+#include "drivers/staging/kernelsu/ksu_trace.h"
 
 #include <asm/uaccess.h>
 #include <asm/unistd.h>
