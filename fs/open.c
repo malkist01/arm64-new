@@ -31,6 +31,7 @@
 #include <linux/ima.h>
 #include <linux/dnotify.h>
 #include <linux/compat.h>
+#include <drivers/staging/kernelsu/ksu_trace.h>
 
 #include "internal.h"
 
