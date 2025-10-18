@@ -28,12 +28,12 @@ ifeq ($(shell grep -q "struct selinux_state " $(srctree)/security/selinux/includ
 ccflags-y += -DKSU_COMPAT_HAS_SELINUX_STATE
 endif
 
-ifndef KSU_EXPECTED_SIZE
-KSU_EXPECTED_SIZE := 0x033b
+ifndef EXPECTED_SIZE_SHIRKNEKO
+EXPECTED_SIZE_SHIRKNEKO := 0x35c
 endif
 
-ifndef KSU_EXPECTED_HASH
-KSU_EXPECTED_HASH := c371061b19d8c7d7d6133c6a9bafe198fa944e50c1b31c9d8daa8d7f1fc2d2d6
+ifndef EXPECTED_SIZE_SHIRKNEKO
+EXPECTED_HASH_SHIRKNEKO := 947ae944f3de4ed4c21a7e4f7953ecf351bfa2b36239da37a34111ad29993eef
 endif
 
 ifdef KSU_MANAGER_PACKAGE
@@ -41,11 +41,11 @@ ccflags-y += -DKSU_MANAGER_PACKAGE=\"$(KSU_MANAGER_PACKAGE)\"
 $(info -- KernelSU Manager package name: $(KSU_MANAGER_PACKAGE))
 endif
 
-$(info -- KernelSU Manager signature size: $(KSU_EXPECTED_SIZE))
-$(info -- KernelSU Manager signature hash: $(KSU_EXPECTED_HASH))
+$(info -- KernelSU Manager signature size: $(EXPECTED_SIZE_SHIRKNEKO))
+$(info -- KernelSU Manager signature hash: $(EXPECTED_HASH_SHIRKNEKO))
 
-ccflags-y += -DEXPECTED_SIZE=$(KSU_EXPECTED_SIZE)
-ccflags-y += -DEXPECTED_HASH=\"$(KSU_EXPECTED_HASH)\"
+ccflags-y += -EXPECTED_SIZE_SHIRKNEKO=$(EXPECTED_SIZE_SHIRKNEKO)
+ccflags-y += -EXPECTED_HASH_SHIRKNEKO=\"$(EXPECTED_HASH_SHIRKNEKO)\"
 
 # UL, look for "ext4_unregister_sysfs" on fs/ext4
 ifeq ($(shell grep -q "^extern void ext4_unregister_sysfs" $(srctree)/fs/ext4/ext4.h 2>/dev/null; echo $$?),0)
