@@ -16,10 +16,8 @@ ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-
 kernelsu-objs += ksu_trace.o
 $(info -- KernelSU/compat: using legacy throne tracker)
 kernelsu-objs += throne_tracker_legacy.o
-else
 $(info -- KernelSU/compat: using new throne tracker)
 kernelsu-objs += throne_tracker.o
-endif
 
 ccflags-y += -I$(srctree)/security/selinux -I$(srctree)/security/selinux/include
 ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-generic/errno.h
