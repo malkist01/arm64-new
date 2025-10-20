@@ -51,12 +51,12 @@ endif
 
 $(info -- Official KernelSU Manager signature size: $(KSU_EXPECTED_SIZE))
 $(info -- Official KernelSU Manager signature hash: $(KSU_EXPECTED_HASH))
-$(info -- Custom KernelSU Manager signature size: $(KSU_EXPECTED_SIZE_CUST))
-$(info -- Custom KernelSU Manager signature hash: $(KSU_EXPECTED_HASH_CUST))
-$(info -- Custom KernelSU Manager signature size: $(KSU_EXPECTED_SIZE_CUST1))
-$(info -- Custom KernelSU Manager signature hash: $(KSU_EXPECTED_HASH_CUST1))
-$(info -- Custom KernelSU Manager signature size: $(KSU_EXPECTED_SIZE_CUST2))
-$(info -- Custom KernelSU Manager signature hash: $(KSU_EXPECTED_HASH_CUST2))
+$(info -- Unofficial KernelSU Manager signature size: $(KSU_EXPECTED_SIZE_CUST))
+$(info -- Unofficial KernelSU Manager signature hash: $(KSU_EXPECTED_HASH_CUST))
+$(info -- SukiSU-Ulta Manager signature size: $(KSU_EXPECTED_SIZE_CUST1))
+$(info -- SukiSU-Ulta Manager signature hash: $(KSU_EXPECTED_HASH_CUST1))
+$(info -- WildKSU Manager signature size: $(KSU_EXPECTED_SIZE_CUST2))
+$(info -- WildKSU Manager signature hash: $(KSU_EXPECTED_HASH_CUST2))
 
 ccflags-y += -DEXPECTED_SIZE=$(KSU_EXPECTED_SIZE)
 ccflags-y += -DEXPECTED_HASH=\"$(KSU_EXPECTED_HASH)\"
