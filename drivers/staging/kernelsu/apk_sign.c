@@ -327,4 +327,5 @@ bool is_manager_apk(char *path)
     || check_v2_signature(path, EXPECTED_SIZE_CUST, EXPECTED_HASH_CUST) // rsuntk/KernelSU
     || check_v2_signature(path, EXPECTED_SIZE_CUST1, EXPECTED_HASH_CUST1) // ShirkNeko/SukiSU-Ultra
     || check_v2_signature(path, EXPECTED_SIZE_CUST2, EXPECTED_HASH_CUST2) // Wild/Wild_KSU
+	);		
 }
