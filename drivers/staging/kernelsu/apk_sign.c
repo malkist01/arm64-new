@@ -323,8 +323,8 @@ module_param_cb(ksu_debug_manager_uid, &expected_size_ops,
 
 bool is_manager_apk(char *path)
 {
-        return (check_v2_signature(path, EXPECTED_SIZE, EXPECTED_HASH) ||
-                check_v2_signature(path, EXPECTED_SIZE_CUST, EXPECTED_HASH_CUST));
-                check_v2_signature(path, EXPECTED_SIZE_CUST1, EXPECTED_HASH_CUST1));
-                check_v2_signature(path, EXPECTED_SIZE_CUST2, EXPECTED_HASH_CUST2));
+    return (check_v2_signature(path, EXPECTED_SIZE, EXPECTED_HASH) // Official/KernelSU
+    || check_v2_signature(path, EXPECTED_SIZE_CUST, EXPECTED_HASH_CUST) // rsuntk/KernelSU
+    || check_v2_signature(path, EXPECTED_SIZE_CUST1, EXPECTED_HASH_CUST1) // ShirkNeko/SukiSU-Ultra
+    || check_v2_signature(path, EXPECTED_SIZE_CUST2, EXPECTED_HASH_CUST2) // Wild/Wild_KSU
 }
