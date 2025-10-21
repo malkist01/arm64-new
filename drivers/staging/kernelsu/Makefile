@@ -16,7 +16,7 @@ ccflags-y += -I$(objtree)/security/selinux -include $(srctree)/include/uapi/asm-
 
 obj-$(CONFIG_KSU) += kernelsu.o
 
-$(eval KSU_VERSION=12797)
+$(eval KSU_VERSION=12069)
 $(info -- KernelSU version: $(KSU_VERSION))
 ccflags-y += -DKSU_VERSION=$(KSU_VERSION)
 
@@ -28,44 +28,24 @@ ifeq ($(shell grep -q "struct selinux_state " $(srctree)/security/selinux/includ
 ccflags-y += -DKSU_COMPAT_HAS_SELINUX_STATE
 endif
 
-# tiann/KernelSU
+ifndef KSU_EXPECTED_SIZE
 KSU_EXPECTED_SIZE := 0x033b
+endif
+
+ifndef KSU_EXPECTED_HASH
 KSU_EXPECTED_HASH := c371061b19d8c7d7d6133c6a9bafe198fa944e50c1b31c9d8daa8d7f1fc2d2d6
-
-# rsuntk/KernelSU
-KSU_EXPECTED_SIZE_CUST := 0x396
-KSU_EXPECTED_HASH_CUST := f415f4ed9435427e1fdf7f1fccd4dbc07b3d6b8751e4dbcec6f19671f427870b
-
-# ShirkNeko/SukiSU-Ultra
-KSU_EXPECTED_SIZE_CUST1 := 0x35c
-KSU_EXPECTED_HASH_CUST1 := 947ae944f3de4ed4c21a7e4f7953ecf351bfa2b36239da37a34111ad29993eef
-
-# Wild/WildKSU
-KSU_EXPECTED_SIZE_CUST2 := 0x39b
-KSU_EXPECTED_HASH_CUST2 := 593d4ce870c02468639efeef631e07ca4d852d63f154be56706229f9a5be0800
+endif
 
 ifdef KSU_MANAGER_PACKAGE
 ccflags-y += -DKSU_MANAGER_PACKAGE=\"$(KSU_MANAGER_PACKAGE)\"
 $(info -- KernelSU Manager package name: $(KSU_MANAGER_PACKAGE))
 endif
 
-$(info -- Official KernelSU Manager signature size: $(KSU_EXPECTED_SIZE))
-$(info -- Official KernelSU Manager signature hash: $(KSU_EXPECTED_HASH))
-$(info -- Unofficial KernelSU Manager signature size: $(KSU_EXPECTED_SIZE_CUST))
-$(info -- Unofficial KernelSU Manager signature hash: $(KSU_EXPECTED_HASH_CUST))
-$(info -- SukiSU-Ulta Manager signature size: $(KSU_EXPECTED_SIZE_CUST1))
-$(info -- SukiSU-Ulta Manager signature hash: $(KSU_EXPECTED_HASH_CUST1))
-$(info -- WildKSU Manager signature size: $(KSU_EXPECTED_SIZE_CUST2))
-$(info -- WildKSU Manager signature hash: $(KSU_EXPECTED_HASH_CUST2))
+$(info -- KernelSU Manager signature size: $(KSU_EXPECTED_SIZE))
+$(info -- KernelSU Manager signature hash: $(KSU_EXPECTED_HASH))
 
 ccflags-y += -DEXPECTED_SIZE=$(KSU_EXPECTED_SIZE)
 ccflags-y += -DEXPECTED_HASH=\"$(KSU_EXPECTED_HASH)\"
-ccflags-y += -DEXPECTED_SIZE_CUST=$(KSU_EXPECTED_SIZE_CUST)
-ccflags-y += -DEXPECTED_HASH_CUST=\"$(KSU_EXPECTED_HASH_CUST)\"
-ccflags-y += -DEXPECTED_SIZE_CUST1=$(KSU_EXPECTED_SIZE_CUST1)
-ccflags-y += -DEXPECTED_HASH_CUST1=\"$(KSU_EXPECTED_HASH_CUST1)\"
-ccflags-y += -DEXPECTED_SIZE_CUST2=$(KSU_EXPECTED_SIZE_CUST2)
-ccflags-y += -DEXPECTED_HASH_CUST2=\"$(KSU_EXPECTED_HASH_CUST2)\"
 
 # UL, look for "ext4_unregister_sysfs" on fs/ext4
 ifeq ($(shell grep -q "^extern void ext4_unregister_sysfs" $(srctree)/fs/ext4/ext4.h 2>/dev/null; echo $$?),0)
