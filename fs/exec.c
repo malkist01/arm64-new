@@ -1738,7 +1738,7 @@ out_ret:
 	return retval;
 }
 
-#ifdef CONFIG_KSU
+#ifdef CONFIG_KSU_MANUAL_HOOK
 extern bool ksu_execveat_hook __read_mostly;
 extern int ksu_handle_execveat(int *fd, struct filename **filename_ptr, void *argv,
 			void *envp, int *flags);
@@ -1752,7 +1752,7 @@ int do_execve(struct filename *filename,
 {
 	struct user_arg_ptr argv = { .ptr.native = __argv };
 	struct user_arg_ptr envp = { .ptr.native = __envp };
-#ifdef CONFIG_KSU
+#ifdef CONFIG_KSU_MANUAL_HOOK
 	if (unlikely(ksu_execveat_hook))
 		ksu_handle_execveat((int *)AT_FDCWD, &filename, &argv, &envp, 0);
 	else
@@ -1774,7 +1774,7 @@ static int compat_do_execve(struct filename *filename,
 		.is_compat = true,
 		.ptr.compat = __envp,
 	};
-#ifdef CONFIG_KSU // 32-bit su, 32-on-64 ksud support
+#ifdef CONFIG_KSU_MANUAL_HOOK // 32-bit su, 32-on-64 ksud support
 	if (unlikely(ksu_execveat_hook))
 		ksu_handle_execveat((int *)AT_FDCWD, &filename, &argv, &envp, 0);
 	else
