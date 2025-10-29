@@ -22,10 +22,11 @@ config KSU_ALLOWLIST_WORKAROUND
           Useful for situations where the SU allowlist is not kept after a reboot.
           
 config KSU_MANUAL_HOOK
-	bool "Hook KernelSU manually"
-	depends on KSU != m
+	    bool "Hook KernelSU manually"
+	    depends on KSU
         default y
-	  If enabled, Hook required KernelSU syscalls with manually-patched function.
+    	help
+	      If enabled, Hook required KernelSU syscalls with manually-patched function.
 
 config KSU_LSM_SECURITY_HOOKS
 	bool "use lsm security hooks"
